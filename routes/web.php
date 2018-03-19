@@ -13,8 +13,15 @@
 
 
 Route::middleware(['guest'])->group(function(){
-	Route::get('/', 'homeController@index');
+	Route::get('/', 'restauranteController@cadastrar');
+	Route::get('restaurante/editar/{id}', 'restauranteController@editar');
+	Route::get('restaurante/listar', 'restauranteController@listar');
+
+
 	Route::post('restaurante/insert', 'restauranteController@insert');
+	Route::post('restaurante/update', 'restauranteController@update');
+
+
 });
 
 Route::middleware(['auth'])->group(function(){

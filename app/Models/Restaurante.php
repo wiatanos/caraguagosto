@@ -10,7 +10,7 @@ class Restaurante extends Model
 	use SoftDeletes;
 	
     protected $table = 'restaurantes';
-    public $timestamps = false;
+    // public $timestamps = false;
     public $fillable = ['nome', 'codigo'];
 
 }

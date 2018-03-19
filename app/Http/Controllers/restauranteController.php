@@ -21,16 +21,28 @@ class restauranteController extends BaseController
     	return view('restaurante', compact('data'));
     }
 
-    public function editar(){
-    	$data['url'] = 'inser/restaurante';
+    public function editar($id){
+       $restaurante['nome'] = Restaurante::find($id)->nome;
+       $restaurante['codigo'] = Restaurante::find($id)->codigo;
+
+        $data = array_merge($restaurante, ['url' => 'restaurante/update']);
+
     	return view('restaurante', compact('data'));
     }
 
+    public function listar(){
+       $restaurantes = Restaurante::all();
+
+
+    $data['table']['title'] = ['Nome', 'Codigo'];
+       foreach ($restaurantes as $restaurante) {
+           $data['table']['dados'][] = [$restaurante['nome'], $restaurante['codigo'], '<a class="btn" href="restaurante/editar/'.$restaurante['id'].'">Editar</a>'];
+       }
+
+        return view('listar', compact('data'));
+    }
+
     public function insert(restauranteInsert $request){
-        $this->validate($request, [
-            'codigo' => 'required| unique:restaurantes',
-        ]);
-        
         try{
             $restaurante = new Restaurante;
             $restaurante->fill($request->all());
@@ -42,8 +54,8 @@ class restauranteController extends BaseController
         }
     }
 
-    public function update(){
-    	$data['url'] = 'inser/restaurante';
+    public function update(restauranteInsert $request){
+    	return $request;
     	return view('restaurante', compact('data'));
     }
 }

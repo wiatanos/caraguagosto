@@ -45,7 +45,7 @@ return [
             'port' => '3306',
             'database' => 'caraguagosto',
             'username' => 'root',
-            'password' => '',
+            'password' => 'root',
             'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

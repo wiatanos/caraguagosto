@@ -9,12 +9,12 @@
 		{{Form::open(['url' => $data['url']])}}
 			<div class="input-group form-group">
 				<div class="input-group-addon"><i class="far fa-user"></i></div>
-				{{ Form::text('nome', null, ['class' => 'form-control', 'placeholder' => 'Nome do Restaurante...'])}}
+				{{ Form::text('nome', isset($data['nome'])? $data['nome'] :null, ['class' => 'form-control', 'placeholder' => 'Nome do Restaurante...'])}}
 			</div>
 
 			<div class="input-group form-group">
 				<div class="input-group-addon"><i class="far fa-user"></i></div>
-				{{ Form::text('codigo', null, ['class' => 'form-control', 'placeholder' => 'Código do Restaurante...'])}}
+				{{ Form::text('codigo', isset($data['nome'])? $data['codigo'] :null, ['class' => 'form-control', 'placeholder' => 'Código do Restaurante...'])}}
 			</div>
 
 			<div class="input-group form-group">

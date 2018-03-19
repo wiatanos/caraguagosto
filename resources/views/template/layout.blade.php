@@ -25,7 +25,6 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/restaurante.php">Cadastrar</a>
-						<a class="dropdown-item" href="#">Editar</a>
 						<a class="dropdown-item" href="#">Listar</a>
 					</div>
 				</li>

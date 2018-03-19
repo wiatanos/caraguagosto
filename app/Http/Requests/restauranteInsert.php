@@ -14,7 +14,7 @@ class restauranteInsert extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,21 +26,22 @@ class restauranteInsert extends FormRequest
     {
         return [
             'nome'   => 'required',
-            'codigo' => 'required|unique:restaurantes',
+            'codigo' => 'required|unique:restaurantes,codigo,'.$this,
             'prato'  => 'required'
-        ]
+        ];
+    }
+
+    
+
+    public function messages()
+    {
+        return [
+            'required' => 'O Campo :attribute é necessario',
+        ];
     }
 
     protected function formatErrors(Validator $validator)
     {
         return $validator->errors()->all();
-    }
-
-    public function messages()
-    {
-        return [
-            'nome.required' => 'A title is required',
-            'codigo.required'  => 'A codigo is required',
-        ];
     }
 }
