@@ -9,7 +9,7 @@
 		{{Form::open(['url' => $data['url']])}}
 			<div class="input-group form-group">
 				<div class="input-group-addon"><i class="far fa-user"></i></div>
-				{{ Form::text('restaurante', null, ['class' => 'form-control', 'placeholder' => 'Nome do Restaurante...'])}}
+				{{ Form::text('nome', null, ['class' => 'form-control', 'placeholder' => 'Nome do Restaurante...'])}}
 			</div>
 
 			<div class="input-group form-group">

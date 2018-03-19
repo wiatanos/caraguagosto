@@ -14,6 +14,7 @@
 
 Route::middleware(['guest'])->group(function(){
 	Route::get('/', 'homeController@index');
+	Route::post('restaurante/insert', 'restauranteController@insert');
 });
 
 Route::middleware(['auth'])->group(function(){
