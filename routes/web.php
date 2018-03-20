@@ -27,6 +27,13 @@ Route::middleware(['guest'])->group(function(){
 	Route::get('prato/listar', 		'pratoController@listar');
 	Route::post('prato/insert', 	'pratoController@insert');
 	Route::post('prato/update', 	'pratoController@update');
+
+	// Rotas categoria
+	Route::get('categoria', 			'categoriaController@cadastrar');
+	Route::get('categoria/editar/{id}', 'categoriaController@editar');
+	Route::get('categoria/listar', 		'categoriaController@listar');
+	Route::post('categoria/insert', 	'categoriaController@insert');
+	Route::post('categoria/update', 	'categoriaController@update');
 });
 
 Route::middleware(['auth'])->group(function(){

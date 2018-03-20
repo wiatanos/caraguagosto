@@ -47,7 +47,7 @@ class categoriaController extends BaseController
 
     public function insert(Request $request){
         try{
-            $categoria = new categoria;
+            $categoria = new Categoria;
             $categoria->fill($request->all());
             $categoria->save();
 
