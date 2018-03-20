@@ -26,7 +26,7 @@ class restauranteInsert extends FormRequest
     {
         return [
             'nome'   => 'required',
-            'codigo' => 'required|unique:restaurantes,codigo,'.$this,
+            'codigo' => 'required|unique:restaurantes,codigo',
             'prato'  => 'required'
         ];
     }

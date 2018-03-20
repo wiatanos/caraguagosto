@@ -13,15 +13,20 @@
 
 
 Route::middleware(['guest'])->group(function(){
-	Route::get('/', 'restauranteController@cadastrar');
-	Route::get('restaurante/editar/{id}', 'restauranteController@editar');
-	Route::get('restaurante/listar', 'restauranteController@listar');
 
+	// Rotas restaurantes
+	Route::get('/', 						'restauranteController@cadastrar');
+	Route::get('restaurante/editar/{id}', 	'restauranteController@editar');
+	Route::get('restaurante/listar',		'restauranteController@listar');
+	Route::post('restaurante/insert', 		'restauranteController@insert');
+	Route::post('restaurante/update', 		'restauranteController@update');
 
-	Route::post('restaurante/insert', 'restauranteController@insert');
-	Route::post('restaurante/update', 'restauranteController@update');
-
-
+	// Rotas pratos
+	Route::get('prato', 			'pratoController@cadastrar');
+	Route::get('prato/editar/{id}', 'pratoController@editar');
+	Route::get('prato/listar', 		'pratoController@listar');
+	Route::post('prato/insert', 	'pratoController@insert');
+	Route::post('prato/update', 	'pratoController@update');
 });
 
 Route::middleware(['auth'])->group(function(){
