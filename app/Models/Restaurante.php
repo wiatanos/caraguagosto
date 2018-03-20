@@ -13,4 +13,9 @@ class Restaurante extends Model
     // public $timestamps = false;
     public $fillable = ['nome', 'codigo'];
 
+    public function pratos()
+    {
+        return $this->hasMany('Pratos');
+    }
+
 }
