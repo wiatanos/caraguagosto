@@ -15,7 +15,7 @@ class Restaurante extends Model
 
     public function pratos()
     {
-        return $this->hasMany('Pratos');
+        return $this->hasMany('App\Models\Pratos');
     }
 
 }

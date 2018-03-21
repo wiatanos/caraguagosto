@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\restauranteInsert;
+use App\Http\Requests\restauranteValidator;
 use App\Models\Restaurante;
 
 class restauranteController extends BaseController
@@ -22,6 +22,7 @@ class restauranteController extends BaseController
     }
 
     public function editar($id){
+       $restaurante['id'] = $id;
        $restaurante['nome'] = Restaurante::find($id)->nome;
        $restaurante['codigo'] = Restaurante::find($id)->codigo;
 
@@ -36,26 +37,28 @@ class restauranteController extends BaseController
 
     $data['table']['title'] = ['Nome', 'Codigo'];
        foreach ($restaurantes as $restaurante) {
-           $data['table']['dados'][] = [$restaurante['nome'], $restaurante['codigo'], '<a class="btn" href="restaurante/editar/'.$restaurante['id'].'">Editar</a>'];
+           $data['table']['dados'][] = [$restaurante['nome'], $restaurante['codigo'], link_to('restaurante/editar/'.$restaurante['id'], 'Editar', ['class' => 'btn btn-primary'])];
        }
 
         return view('listar', compact('data'));
     }
 
-    public function insert(restauranteInsert $request){
+    public function insert(restauranteValidator $request){
         try{
             $restaurante = new Restaurante;
             $restaurante->fill($request->all());
             $restaurante->save();
 
-            return redirect('/')->with('status', 'Ae ae!');
+            return redirect('restaurante/listar')->with('status', 'Sucesso my friend!');
         }catch (Exception $e){
             return $e;
         }
     }
 
-    public function update(restauranteInsert $request){
-    	return $request;
-    	return view('restaurante', compact('data'));
+    public function update(restauranteValidator $request){
+        Restaurante::find($request->get('id'))->fill($request->all())->update();
+        $data['url'] = 'restaurante/insert';
+
+        return redirect('restaurante/listar')->with('status', 'Sucesso my friend!');
     }
 }

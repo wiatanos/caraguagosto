@@ -16,7 +16,7 @@ class Categoria extends Model
 
     public function restaurantes()
     {
-        return $this->hasMany('Restaurante');
+        return $this->hasMany('App\Models\Restaurante');
     }
 }
 

@@ -43,11 +43,16 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{{ url('prato') }}">Cadastrar</a>
-						<a class="dropdown-item" href="#">Listar</a>
+						<a class="dropdown-item" href="{{ url('prato/listar') }}">Listar</a>
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Logout <i class="fas fa-sign-out-alt"></i></a>
+					<a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout <i class="fas fa-sign-out-alt"></i>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+					</a>
 				</li>
 			</ul>
 		</div>

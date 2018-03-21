@@ -9,12 +9,18 @@
 		{{Form::open(['url' => $data['url']])}}
 			<div class="input-group form-group">
 				<div class="input-group-addon"><i class="far fa-user"></i></div>
-				{{ Form::text('nome', isset($data['nome'])? $data['nome'] :null, ['class' => 'form-control', 'placeholder' => 'Nome do Prato...'])}}
+				@if(isset($data['prato']))<input type="hidden" name="id" value="{{ $data['id'] }}">@endif
+				{{ Form::text('nome', isset($data['prato'])? $data['prato'] :null, ['class' => 'form-control', 'placeholder' => 'Nome do Prato...'])}}
 			</div>
 
 			<div class="input-group form-group">
 				<div class="input-group-addon"><i class="far fa-user"></i></div>
-				{{ Form::select('pratos', ['0' => 'Selecione uma Categoria','1' => 'Gourmet'], null, ['class' => 'form-control'])}}
+				{{ Form::select('restaurante_id', $data['restaurantes'], isset($data['restaurante']) ? $data['restaurante']:null, ['class' => 'form-control', 'placeholder' => 'Selecione o restaurante'])}}
+			</div>
+
+			<div class="input-group form-group">
+				<div class="input-group-addon"><i class="far fa-user"></i></div>
+				{{ Form::select('categoria_id', $data['categorias'], isset($data['categoria'])? $data['categoria']:null, ['class' => 'form-control', 'placeholder' => 'Selecione a categoria'])}}
 			</div>
 
 			<div class="input-group form-group">

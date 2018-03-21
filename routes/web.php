@@ -12,7 +12,7 @@
 */
 
 
-Route::middleware(['guest'])->group(function(){
+Route::middleware(['auth'])->group(function(){
 
 	// Rotas restaurantes
 	Route::get('/', 						'restauranteController@cadastrar');
@@ -36,8 +36,7 @@ Route::middleware(['guest'])->group(function(){
 	Route::post('categoria/update', 	'categoriaController@update');
 });
 
-Route::middleware(['auth'])->group(function(){
-	Route::get('/login', function(){
-		return 'route atuh';
-	});
-});
+
+Auth::routes();
+
+Route::get('/', 'homeController@index')->name('home');

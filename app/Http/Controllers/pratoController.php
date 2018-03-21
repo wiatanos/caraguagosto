@@ -9,8 +9,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\restauranteInsert;
+use App\Http\Requests\pratoValidator;
 use App\Models\Prato;
+use App\Models\Categoria;
+use App\Models\Restaurante;
+
 
 /**
 * 
@@ -21,26 +24,47 @@ class pratoController extends BaseController
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function cadastrar(){
+
+       foreach (Categoria::all() as $key => $value) {
+            $data['categorias'][$value['id']] = $value['nome'];
+       }
+
+       foreach (Restaurante::all() as $key => $value) {
+            $data['restaurantes'][$value['id']] = $value['nome'];
+       }
+       // return $data['categorias'];
     	$data['url'] = 'prato/insert';
     	return view('prato', compact('data'));
     }
 
     public function editar($id){
-       $restaurante['nome'] = Prato::find($id)->nome;
+      $prato = Prato::find($id);
 
-        $data = array_merge($restaurante, ['url' => 'restaurante/update']);
+      $data['id'] = $id;
+       $data['prato'] = $prato->nome;
+       $data['restaurante'] = $prato->restaurante->id;
+       $data['categoria'] = $prato->categoria->id;
 
-    	return view('restaurante', compact('data'));
+       foreach (Categoria::all() as $key => $value) {
+            $data['categorias'][$value['id']] = $value['nome'];
+       }
+
+       foreach (Restaurante::all() as $key => $value) {
+            $data['restaurantes'][$value['id']] = $value['nome'];
+       }
+
+
+        $data['url'] = 'prato/update';
+
+    	return view('prato', compact('data'));
     }
 
     public function listar(){
-       $restaurantes = Restaurante::all();
+        $data['table']['title'] = ['Prato', 'Restaurante'];
 
-
-    $data['table']['title'] = ['Nome', 'Codigo'];
-       foreach ($restaurantes as $restaurante) {
-           $data['table']['dados'][] = [$restaurante['nome'], $restaurante['codigo'], '<a class="btn" href="restaurante/editar/'.$restaurante['id'].'">Editar</a>'];
-       }
+        foreach (Prato::all() as $key => $value) {
+           $data['table']['dados'][] = [$value['nome'], $value->restaurante->nome, link_to('prato/editar/'.$value['id'], 'Editar', ['class' => 'btn btn-primary'])];
+        }
 
         return view('listar', compact('data'));
     }
@@ -51,14 +75,14 @@ class pratoController extends BaseController
             $prato->fill($request->all());
             $prato->save();
 
-            return redirect('/')->with('status', 'Ae ae!');
+            return redirect('prato/listar')->with('status', 'Sucesso my frind');
         }catch (Exception $e){
             return $e;
         }
     }
 
-    public function update(restauranteInsert $request){
-    	return $request;
-    	return view('restaurante', compact('data'));
+    public function update(pratoValidator $request){
+      Prato::find($request->get('id'))->fill($request->all())->update();
+    	return redirect('prato/listar')->with('status', 'Sucesso my frind');
     }
 }

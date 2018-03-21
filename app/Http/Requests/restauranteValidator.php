@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
-class restauranteInsert extends FormRequest
+class restauranteValidator extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +25,15 @@ class restauranteInsert extends FormRequest
      */
     public function rules()
     {
+         // $id = $this->request->get('codigo');
+
         return [
-            'nome'   => 'required',
-            'codigo' => 'required|unique:restaurantes,codigo',
-            'prato'  => 'required'
+            'nome' => 'required',
+            'codigo' => [
+                'required',
+                Rule::unique('restaurantes')->ignore($this->request->get('codigo_old'), 'codigo'),
+                // Rule::unique('users')->ignore($this->user->id, 'id')
+            ],
         ];
     }
 

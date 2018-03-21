@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\categoriaInsert;
+use App\Http\Requests\categoriaValidator;
 use App\Models\Categoria;
 
 /**
@@ -26,6 +26,7 @@ class categoriaController extends BaseController
     }
 
     public function editar($id){
+        $categoria['id'] = $id;
        $categoria['nome'] = Categoria::find($id)->nome;
 
         $data = array_merge($categoria, ['url' => 'categoria/update']);
@@ -37,9 +38,9 @@ class categoriaController extends BaseController
        $categorias = categoria::all();
 
 
-    $data['table']['title'] = ['Nome', 'Codigo'];
+    $data['table']['title'] = ['Nome'];
        foreach ($categorias as $categoria) {
-           $data['table']['dados'][] = [$categoria['nome'], $categoria['codigo'], '<a class="btn" href="categoria/editar/'.$categoria['id'].'">Editar</a>'];
+           $data['table']['dados'][] = [$categoria['nome'], $categoria['codigo'], link_to('categoria/editar/'.$categoria['id'], 'Editar', ['class' => 'btn btn-primary'])];
        }
 
         return view('listar', compact('data'));
@@ -57,8 +58,8 @@ class categoriaController extends BaseController
         }
     }
 
-    public function update(categoriaInsert $request){
-    	return $request;
-    	return view('categoria', compact('data'));
+    public function update(categoriaValidator $request){
+        Categoria::find($request->get('id'))->fill($request->all())->update();
+    	return redirect('categoria/listar')->with('status', 'Sucesso my friend!');
     }
 }
