@@ -15,7 +15,7 @@
 Route::middleware(['auth'])->group(function(){
 
 	// Rotas restaurantes
-	Route::get('/', 						'restauranteController@cadastrar');
+	Route::get('restaurante', 				'restauranteController@cadastrar');
 	Route::get('restaurante/editar/{id}', 	'restauranteController@editar');
 	Route::get('restaurante/listar',		'restauranteController@listar');
 	Route::post('restaurante/insert', 		'restauranteController@insert');
@@ -34,9 +34,16 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('categoria/listar', 		'categoriaController@listar');
 	Route::post('categoria/insert', 	'categoriaController@insert');
 	Route::post('categoria/update', 	'categoriaController@update');
+
 });
 
 
 Auth::routes();
 
-Route::get('/', 'homeController@index')->name('home');
+Route::get('votacao', 		'votacaoController@index');
+Route::get('/', 'homeController@index')->name('home')->middleware('guest');
+Route::get('/', 'restauranteController@cadastrar')->middleware('auth');
+
+
+
+
