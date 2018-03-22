@@ -1,5 +1,5 @@
 @extends('template.layout')
-
+@extends('template.nav')
 @section('content')
 <div class="container">
     <div class="row">

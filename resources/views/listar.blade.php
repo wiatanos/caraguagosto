@@ -1,7 +1,9 @@
 @extends('template.layout')
 @section('titulo', 'Listar - {{ $data["titulo"] }}')
-
+@extends('template.nav')
 @section('conteudo')
+<div class="col-12 card mt-3">
+	<div class="card-body">
 	<table class="table">
 		<tr>
 			@foreach($data['table']['title'] as $conteudo)
@@ -17,4 +19,6 @@
 			</tr>
 			@endforeach
 	</table>
+	</div>
+	</div>
 @endsection

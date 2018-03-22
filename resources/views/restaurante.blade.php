@@ -1,12 +1,14 @@
 @extends('template.layout')
 @section('titulo', 'Restaurantes')
+@extends('template.nav')
 @section('conteudo')
 <div class="row">
-	<div class="col-12" style="margin-top: 20px;">
-		<h5 class="text-center">Cadastro de Restaurante</h5>
-	</div>
-	<div class="col-12 shadow" style="padding: 10px;">
-		{{Form::open(['url' => $data['url']])}}
+
+	<div class="col-12 card mt-5">
+		<div class="col-12 card-body">
+			<h5 class="text-center card-title">Cadastro de Restaurante</h5>
+
+			{{Form::open(['url' => $data['url']])}}
 			<div class="input-group form-group">
 				<div class="input-group-addon"><i class="far fa-user"></i></div>
 				@if(isset($data['nome']))<input type="hidden" name="id" value="{{ $data['id'] }}">@endif
@@ -23,7 +25,8 @@
 				{{ Form::submit(isset($data['nome'])? 'Atualizar' : 'Cadastrar', ['class' => 'form-control btn btn-success']) }}
 			</div>
 
-		{{ Form::close() }}
+			{{ Form::close() }}
+		</div>
 	</div>
 </div>
 @endsection
