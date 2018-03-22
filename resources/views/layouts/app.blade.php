@@ -18,7 +18,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">Caragua a Gosto</a>
+        <a class="navbar-brand">Caragua a Gosto </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,8 +32,9 @@
             </ul>
         </div>
 </nav>
-
-@yield('content')
+<div class="main">
+    @yield('content')
+</div>
 
 <!-- Scripts -->
 <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>

@@ -1,10 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Bad+Script');
+body{
+	background: url('../img/food.jpg') no-repeat center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height : 100vh;
+  width : 100%;
+}
 .input-group-addon{
 	padding: 10px;
 }
 
 .navbar{
-	background-color: rgba(52, 73, 94,1.0) !important;
+	background-color: rgba(52, 73, 94,0.8) !important;
 	color: white !important;
+}
+
+.navbar-brand{
+  font-family: 'Bad Script', cursive;
 }
 
 .navbar-dark .navbar-toggler{
@@ -20,9 +34,9 @@ select.form-control:not([size]):not([multiple]){
 }
 
 .shadow{
-	background-color: rgba(255,255,255, 1);
+	background-color: rgba(255,255,255, 0.8);
 	box-shadow: 0 10px 10px 0px rgba(0,0,0, 0.1);
-	border: 2px solid white;
+	/*border: 2px solid white;*/
 }
 body{
 	/*background: url('../img/fundo.jpg');
@@ -60,4 +74,64 @@ body{
 
 .ls_container{
 	width: 90%;
+}
+
+.card{
+	background-color: rgba(255,255,255,0.8);
+}
+
+.card-header{
+	background-color: rgba(255,255,255,0.3);
+}
+
+
+/*CUSTOM CHECKBOX*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+.switch input {
+  display: none;
+}
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 40px;
+}
+.switch .slider::before {
+  position: absolute;
+  content: "";
+  height: calc( 20px - (2px * 2));
+  width: calc( 20px - (2px * 2));
+  left: 4px;
+  top: 2px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.switch .slider::before {
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4a89d6;
+}
+input:checked + .slider::before {
+  -webkit-transform: translateX(calc( 40px - 20px  ));
+  -ms-transform: translateX(calc( 40px - 20px ));
+  transform: translateX(calc( 40px - 20px ));
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
 }
