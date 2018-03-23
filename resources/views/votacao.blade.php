@@ -8,7 +8,7 @@
 			<div class="card-header text-center">Votação<br><p class="text-center"><img class="card-img text" src="assets/img/gosto.png" style="height: 100px; width: 100px;"></p></div>
 			
 			<div class="col-12 card-body">
-				<form class="form-row">
+				{{Form::open(['url' => 'votacao/insert'])}}
 					<ul class="col-12 nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
 						<li class="nav-item">
 							<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
@@ -45,21 +45,21 @@
 						<div class=" col-12 tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 							<div class="input-group form-group">
 								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
-								<input class="form-control mySearch" id="ls_query" type="text" name="codigo" placeholder="Codigo do Restaurante">
+								<input class="form-control mySearch" id="ls_query" type="text" name="restaurante_codigo" placeholder="Codigo do Restaurante">
 							</div> 
 							<div class="input-group form-group">
 								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
-								<input class="form-control mySearch" id="ls_query" type="number" maxlength="2" max="10" name="codigo" placeholder="Apresentação do Prato">
-							</div> 
-
-							<div class="input-group form-group">
-								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
-								<input class="form-control mySearch" id="ls_query" type="number" max="10" name="codigo" placeholder="Sabor do Prato">
+								<input class="form-control" type="number" maxlength="2" max="10" name="prato" placeholder="Apresentação do Prato">
 							</div> 
 
 							<div class="input-group form-group">
 								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
-								<input class="form-control mySearch" id="ls_query" type="number" max="10" name="codigo" placeholder="Ambiente">
+								<input class="form-control" type="number" max="10" name="sabor" placeholder="Sabor do Prato">
+							</div> 
+
+							<div class="input-group form-group">
+								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
+								<input class="form-control" type="number" max="10" name="ambiente" placeholder="Ambiente">
 							</div>
 
 							<div class="float-right">
@@ -67,7 +67,7 @@
 							</div>
 						</div>
 					</div>
-				</form>
+				{{Form::close()}}
 			</div>
 		</div>
 	</div>

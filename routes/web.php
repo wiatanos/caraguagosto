@@ -40,7 +40,13 @@ Route::middleware(['auth'])->group(function(){
 
 Auth::routes();
 
-Route::get('votacao', 		'votacaoController@index');
+Route::get('votacao', 				'votacaoController@index');
+Route::any('votacao/listar', 		'votacaoController@listar');
+Route::get('votacao/relatorio', 	'votacaoController@relatorio');
+Route::get('votacao/relatorio/page', 	'votacaoController@page');
+
+Route::post('votacao/insert', 		'votacaoController@insert');
+
 Route::get('/', 'homeController@index')->name('home')->middleware('guest');
 Route::get('/', 'restauranteController@cadastrar')->middleware('auth');
 

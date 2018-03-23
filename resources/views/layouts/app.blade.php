@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Registrar <i class="fas fa-sign-out-alt"></i></a>
+                    <a class="nav-link" href="{{ url('votacao') }}">Votação <i class="fas fa-sign-out-alt"></i></a>
                 </li>
             </ul>
         </div>
