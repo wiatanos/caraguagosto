@@ -43,7 +43,7 @@ Auth::routes();
 Route::get('votacao', 				'votacaoController@index');
 Route::any('votacao/listar', 		'votacaoController@listar');
 Route::get('votacao/relatorio', 	'votacaoController@relatorio');
-Route::get('votacao/relatorio/page', 	'votacaoController@page');
+Route::get('prato/get/{id}', 		'votacaoController@prato');
 
 Route::post('votacao/insert', 		'votacaoController@insert');
 
