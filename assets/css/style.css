@@ -144,5 +144,5 @@ input:focus + .slider {
 .card-body{
   max-height: 400px !important;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
