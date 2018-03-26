@@ -45,17 +45,8 @@
 						<div class=" col-12 tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 							<div class="input-group form-group">
 								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
-								<input class="form-control mySearch" id="ls_query" type="text" name="restaurante_codigo" placeholder="Codigo do Restaurante">
-							</div> 
-							<div class="input-group form-group">
-								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
-								<input class="form-control" type="number" maxlength="2" max="10" name="prato" placeholder="Apresentação do Prato">
-							</div> 
-
-							<div class="input-group form-group">
-								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
-								<input class="form-control" type="number" max="10" name="sabor" placeholder="Sabor do Prato">
-							</div> 
+								{{ Form::select('restaurante_codigo', $data['codigo'], null, ['class' => 'form-control', 'placeholder' => 'Escolha o restaurante']) }}
+							</div>
 
 							<div class="input-group form-group">
 								<div class="input-group-addon"><i class="fas fa-utensils"></i></div>
@@ -72,4 +63,38 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('js')
+<script type="text/javascript">
+	$('select[name="restaurante_codigo"]').on('change', function(e){
+		var element = $(this);
+		var newDiv = '<div class="prato"><p class="text-center">Prato</p>'+
+					'<div class="input-group form-group">'+
+					'<div class="input-group-addon"><i class="fas fa-utensils"></i></div>'+
+					'{{ Form::select('prato_id[]', [], null, ['class' => 'col-12 form-control', 'readonly', 'true']) }}'+
+					'</div>'+
+					'<div class="input-group form-group">'+
+					'<div class="input-group-addon"><i class="fas fa-utensils"></i></div>'+
+					'{{ Form::text('sabor[]', null, ['class' => 'form-control', 'placeholder' => 'Sabor']) }}'+
+					'</div>'+
+					'<div class="input-group form-group">'+
+					'<div class="input-group-addon"><i class="fas fa-utensils"></i></div>'+
+					'{{ Form::text('apresentacao[]', null, ['class' => 'form-control', 'placeholder' => 'Apresentação']) }}'+
+					'</div><hr>';
+
+		$('.prato').remove();
+			$.ajax({
+				method: "get",
+				url: 'prato/get/'+$('select[name="restaurante_codigo"]').val(),
+			})
+			.done(function( msg ) {
+				console.log(msg)
+				$.each(msg, function(i, e){
+					element.parent().after(newDiv);
+					console.log(element.parents().find('.prato').find('select').first().append('<option value="'+i+'" selected>'+e+'</option>'))
+				})
+			});
+	})
+</script>
 @endsection
