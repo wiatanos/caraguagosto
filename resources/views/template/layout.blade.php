@@ -28,6 +28,11 @@
 	</div>
 
 		<script type="text/javascript" src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/js/validator/dist/jquery.validate.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/js/validator/dist/additional-methods.js') }}"></script>
+		<script type="text/javascript" src="{{asset('assets/js/validator/src/localization/messages_pt_BR.js') }}"></script>
+		<script type="text/javascript" src="{{asset('assets/js/validacao.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
 		<script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 	@yield('js')
 </body>

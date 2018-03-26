@@ -1,5 +1,6 @@
 // votacao
 $('.btn').on('click', function(e){
+
 	$.ajax({
 		method: "POST",
 		url: "listar",

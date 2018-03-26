@@ -39,14 +39,7 @@ class votacaoValidator extends FormRequest
         ];
     }
 
-    
 
-    public function messages()
-    {
-        return [
-            'required' => 'O Campo :attribute é necessario',
-        ];
-    }
 
     protected function formatErrors(Validator $validator)
     {
