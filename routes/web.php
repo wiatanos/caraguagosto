@@ -50,6 +50,14 @@ Route::post('votacao/insert', 		'votacaoController@insert');
 Route::get('/', 'homeController@index')->name('home')->middleware('guest');
 Route::get('/', 'restauranteController@cadastrar')->middleware('auth');
 
+ // abort(404);
+
+Route::get('/301', function(){
+   return abort(404);
+});
+
+
+
 
 
 

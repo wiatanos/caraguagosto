@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Bad+Script');
+/*@import "caraguagosto/assets/css/fontawesome-all";*/
 body{
 	background: url('../img/food.jpg') no-repeat center center; 
   -webkit-background-size: cover;
@@ -145,4 +146,16 @@ input:focus + .slider {
   max-height: 400px !important;
   overflow-y: scroll;
   overflow-x: auto;
+}
+
+.error-icon::before{
+  font-family: "Font Awesome 5 Free";
+  content: "\f12a";
+  color: #e74c3c; 
+}
+
+.success-icon::before{
+  font-family: "Font Awesome 5 Free";
+  content: "\f058";
+  color: #2ecc71; 
 }

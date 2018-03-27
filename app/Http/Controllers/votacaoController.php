@@ -71,7 +71,7 @@ class votacaoController extends BaseController
     }
 
     public function listar(Request $request){
-        $resultado = Votacao::where('restaurante_codigo', $request->get('id'))->paginate(10);
+        $resultado = Votacao::where('restaurante_codigo', $request->get('id'))->paginate(5);
 
         if($resultado->count() == 0){
             return '<div class="alert alert-warning">Nenhum voto contabilizado para tal restaurante</div>';

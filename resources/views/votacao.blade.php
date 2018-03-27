@@ -8,7 +8,7 @@
 			<div class="card-header text-center">Votação<br><p class="text-center"><img class="card-img text" src="assets/img/gosto.png" style="height: 100px; width: 100px;"></p></div>
 			
 			<div class="col-12 card-body">
-				{{Form::open(['url' => 'votacao/insert'])}}
+				{{Form::open(['url' => 'votacao/insert', 'id' => 'form'])}}
 				<ul class="col-12 nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
 					<li class="nav-item">
 						<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
@@ -28,12 +28,12 @@
 					<div class="col-12 tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 						<div class="input-group form-group">
 							<div class="input-group-addon"><i class="far fa-user"></i></div>
-							<input class="form-control required" type="text" name="nome" placeholder="Nome...">
+							{{ Form::text('nome', null, ['class' => 'form-control required', 'placeholder' => 'Nome...']) }}
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-addon"><i class="far fa-envelope"></i></div>
-							<input class="form-control required" type="text" name="email" placeholder="E-Mail...">
+							<input class="form-control required email" type="text" name="email" placeholder="E-Mail...">
 						</div>
 
 						<div class="input-group form-group">
@@ -80,11 +80,11 @@
 		'</div>'+
 		'<div class="input-group form-group">'+
 		'<div class="input-group-addon"><i class="fas fa-utensils"></i></div>'+
-		'{{ Form::text('sabor[]', null, ['class' => 'form-control required', 'placeholder' => 'Sabor']) }}'+
+		'{{ Form::text('sabor[]', null, ['class' => 'form-control required number max-5', 'placeholder' => 'Sabor']) }}'+
 		'</div>'+
 		'<div class="input-group form-group">'+
 		'<div class="input-group-addon"><i class="fas fa-utensils"></i></div>'+
-		'{{ Form::text('apresentacao[]', null, ['class' => 'form-control required', 'placeholder' => 'Apresentação']) }}'+
+		'{{ Form::text('apresentacao[]', null, ['class' => 'form-control required number max-5', 'placeholder' => 'Apresentação']) }}'+
 		'</div><hr>';
 
 		$('.prato').remove();

@@ -31,8 +31,8 @@ class restauranteValidator extends FormRequest
             'nome' => 'required',
             'codigo' => [
                 'required',
+                'numeric',
                 Rule::unique('restaurantes')->ignore($this->request->get('codigo_old'), 'codigo'),
-                // Rule::unique('users')->ignore($this->user->id, 'id')
             ],
         ];
     }

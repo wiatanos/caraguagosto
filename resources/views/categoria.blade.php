@@ -9,12 +9,12 @@
 
 			<div class="card-body">
 
-				{{Form::open(['url' => $data['url']])}}
+				{{Form::open(['url' => $data['url'], 'id' => 'form'])}}
 
 				<div class="input-group form-group">
 					<div class="input-group-addon"><i class="far fa-user"></i></div>
 					@if(isset($data['nome']))<input type="hidden" name="id" value="{{ $data['id'] }}">@endif
-					{{ Form::text('nome', isset($data['nome'])? $data['nome'] :null, ['class' => 'form-control', 'placeholder' => 'Nome da Categoria...'])}}
+					{{ Form::text('nome', isset($data['nome'])? $data['nome'] :null, ['class' => 'form-control required', 'placeholder' => 'Nome da Categoria...'])}}
 				</div>
 
 				<div class="input-group form-group">

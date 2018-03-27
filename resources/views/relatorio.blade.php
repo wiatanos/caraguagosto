@@ -8,14 +8,16 @@
 		<div class="card">
 			<div class="card-header"><h5 class="text-center">Relatorio de Votações</h5></div>
 			<div class="card-body">
-				{{ Form::open(['url' => 'votacao/listar', 'method' => 'post']) }}
+				{{ Form::open(['url' => 'votacao/listar', 'method' => 'post', 'id' => 'form']) }}
 				<div class="form-group input-group">
 					<div class="input-group-addon">#</div>
 					{{ Form::select('id', $data['codigo'], null, ['class' => 'form-control ']) }}
 					{{ Form::button('Resultados', ['class' => 'btn btn-primary']) }}
 				</div>
 				{{ Form::close() }}
-				<div id="resultado" class="table-responsive"></div>
+				<div id="resultado" class="table-responsive">
+						<h5 class="text-center load d-none"><img src="{{ asset('assets/img/svg/load.svg') }}"></h5>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -45,6 +47,7 @@
 				url: $(this).attr('url'),
 			})
 			.done(function( msg ) {
+				$('.load').addClass('d-none');
 				$('#resultado').html(msg);
 			});
 		});

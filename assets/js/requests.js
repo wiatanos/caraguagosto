@@ -1,5 +1,6 @@
 // votacao
 $('.btn').on('click', function(e){
+$('.load').removeClass('d-none');
 
 	$.ajax({
 		method: "POST",
@@ -7,6 +8,8 @@ $('.btn').on('click', function(e){
 		data: $('form').serialize()
 	})
 	.done(function( msg ) {
+      $('.load').addClass('d-none');
+
 		$('#resultado').html(msg);
 	});
 })

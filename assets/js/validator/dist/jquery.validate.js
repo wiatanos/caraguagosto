@@ -276,18 +276,18 @@ $.extend( $.validator, {
 		errorClass: "error",
 		pendingClass: "pending",
 		validClass: "valid",
-		errorElement: "label",
+		errorElement: "div",
 		focusCleanup: false,
 		focusInvalid: true,
 		errorContainer: $( [] ),
-		errorLabelContainer: $( [] ),
+		errordivContainer: $( [] ),
 		onsubmit: true,
 		ignore: ":hidden",
 		ignoreTitle: false,
 		onfocusin: function( element ) {
 			this.lastActive = element;
 
-			// Hide error label and remove error class on focus if enabled
+			// Hide error div and remove error class on focus if enabled
 			if ( this.settings.focusCleanup ) {
 				if ( this.settings.unhighlight ) {
 					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
@@ -383,9 +383,9 @@ $.extend( $.validator, {
 	prototype: {
 
 		init: function() {
-			this.labelContainer = $( this.settings.errorLabelContainer );
-			this.errorContext = this.labelContainer.length && this.labelContainer || $( this.currentForm );
-			this.containers = $( this.settings.errorContainer ).add( this.settings.errorLabelContainer );
+			this.divContainer = $( this.settings.errordivContainer );
+			this.errorContext = this.divContainer.length && this.divContainer || $( this.currentForm );
+			this.containers = $( this.settings.errorContainer ).add( this.settings.errordivContainer );
 			this.submitted = {};
 			this.valueCache = {};
 			this.pendingRequest = 0;
@@ -897,14 +897,14 @@ $.extend( $.validator, {
 				if ( this.settings.highlight ) {
 					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
 				}
-				this.showLabel( error.element, error.message );
+				this.showdiv( error.element, error.message );
 			}
 			if ( this.errorList.length ) {
 				this.toShow = this.toShow.add( this.containers );
 			}
 			if ( this.settings.success ) {
 				for ( i = 0; this.successList[ i ]; i++ ) {
-					this.showLabel( this.successList[ i ] );
+					this.showdiv( this.successList[ i ] );
 				}
 			}
 			if ( this.settings.unhighlight ) {
@@ -927,7 +927,7 @@ $.extend( $.validator, {
 			} );
 		},
 
-		showLabel: function( element, message ) {
+		showdiv: function( element, message ) {
 			var place, group, errorID, v,
 				error = this.errorsFor( element ),
 				elementID = this.idOrName( element ),
@@ -938,7 +938,7 @@ $.extend( $.validator, {
 				// Refresh error/success class
 				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
 
-				// Replace message on existing label
+				// Replace message on existing div
 				error.html( message );
 			} else {
 
@@ -956,8 +956,8 @@ $.extend( $.validator, {
 					// actually showing the wrapped element is handled elsewhere
 					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
 				}
-				if ( this.labelContainer.length ) {
-					this.labelContainer.append( place );
+				if ( this.divContainer.length ) {
+					this.divContainer.append( place );
 				} else if ( this.settings.errorPlacement ) {
 					this.settings.errorPlacement.call( this, place, $( element ) );
 				} else {
@@ -965,14 +965,14 @@ $.extend( $.validator, {
 				}
 
 				// Link error back to the element
-				if ( error.is( "label" ) ) {
+				if ( error.is( "div" ) ) {
 
-					// If the error is a label, then associate using 'for'
+					// If the error is a div, then associate using 'for'
 					error.attr( "for", elementID );
 
-					// If the element is not a child of an associated label, then it's necessary
+					// If the element is not a child of an associated div, then it's necessary
 					// to explicitly apply aria-describedby
-				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
+				} else if ( error.parents( "div[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
 					errorID = error.attr( "id" );
 
 					// Respect existing non-error aria-describedby
@@ -1012,7 +1012,7 @@ $.extend( $.validator, {
 		errorsFor: function( element ) {
 			var name = this.escapeCssMeta( this.idOrName( element ) ),
 				describer = $( element ).attr( "aria-describedby" ),
-				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
+				selector = "div[for='" + name + "'], div[for='" + name + "'] *";
 
 			// 'aria-describedby' should directly reference the error element
 			if ( describer ) {
