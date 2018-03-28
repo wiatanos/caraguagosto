@@ -49,7 +49,7 @@ class votacaoController extends BaseController
 
             if(Votacao::where('pessoa_id', $id)->count() !== 0){
                 if (Votacao::where('pessoa_id', $id)->first()->restaurante_codigo == $request->get('restaurante_codigo')) {
-                    return redirect('votacao')->with('status', 'Você já votou nesse restaurente');
+                    return redirect('votacao')->with('error', 'Você já votou nesse restaurente');
                 }
             }
 
@@ -64,7 +64,7 @@ class votacaoController extends BaseController
 
             }
 
-            return redirect('votacao')->with('status', 'Ae ae!');
+            return redirect('votacao')->with('success', 'Voto Realizado!');
         }catch (Exception $e){
             return $e;
         }
@@ -74,7 +74,7 @@ class votacaoController extends BaseController
         $resultado = Votacao::where('restaurante_codigo', $request->get('id'))->paginate(5);
 
         if($resultado->count() == 0){
-            return '<div class="alert alert-warning">Nenhum voto contabilizado para tal restaurante</div>';
+            return '<div class="alert alert-warning">Nenhum voto contabilizado para esse restaurante</div>';
         };
 
         $head = '<thead class="thead-dark"><tr><td>Prato</td><td>Apresentação</td><td>Sabor do Prato</td><td>Ambiente</td></tr><thead>';

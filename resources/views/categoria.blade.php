@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('titulo', 'Restaurantes')
+@section('titulo', 'Categorias')
 @extends('template.nav')
 @section('conteudo')
 <div class="row">
@@ -9,7 +9,7 @@
 
 			<div class="card-body">
 
-				{{Form::open(['url' => $data['url'], 'id' => 'form'])}}
+				{{Form::open(['url' => $data['url'], 'method' => $data['method'], 'id' => 'form'])}}
 
 				<div class="input-group form-group">
 					<div class="input-group-addon"><i class="far fa-user"></i></div>

@@ -9,7 +9,7 @@
 
 			<div class="col-12 card-body">
 
-				{{Form::open(['url' => $data['url'], 'id' => 'form', 'class' => 'needs-validation'])}}
+				{{Form::open(['url' => $data['url'], 'method' => $data['method'], 'id' => 'form', 'class' => 'needs-validation'])}}
 				<div class="input-group form-group">
 					<div class="input-group-addon"><i class="far fa-user"></i></div>
 					@if(isset($data['nome']))<input type="hidden" name="id" value="{{ $data['id'] }}">@endif

@@ -43,20 +43,6 @@
 
                         <div class="form-group">
                             <div class="col-12">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                                        <span class="slider"></span>
-                                    </label>
-                                    <br>
-                                </div>
-                                    <span >Lembrar senha</span>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-12">
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>

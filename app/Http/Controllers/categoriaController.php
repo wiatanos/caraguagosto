@@ -20,46 +20,47 @@ class categoriaController extends BaseController
 	
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function cadastrar(){
-    	$data['url'] = 'categoria/insert';
+    public function index(){
+    	$data['url'] = 'categoria';
+        $data['method'] = 'POST';
     	return view('categoria', compact('data'));
     }
 
-    public function editar($id){
-        $categoria['id'] = $id;
-       $categoria['nome'] = Categoria::find($id)->nome;
+    public function edit($id){
+        $data['method'] = 'PUT';
+        $data['id'] = $id;
+        $data['nome'] = Categoria::find($id)->nome;
+        $data['url'] = 'categoria/'.$id;
 
-        $data = array_merge($categoria, ['url' => 'categoria/update']);
-
-    	return view('categoria', compact('data'));
+        return view('categoria', compact('data'));
     }
 
-    public function listar(){
-       $categorias = categoria::all();
+    public function show(){
+     $categorias = categoria::all();
 
+     $data['titulo'] = 'Categorias';
+     $data['table']['title'] = ['Nome'];
+     foreach ($categorias as $categoria) {
+         $data['table']['dados'][] = [$categoria['nome'], $categoria['codigo'], link_to('categoria/'.$categoria['id'].'/edit', 'Editar', ['class' => 'btn btn-primary'])];
+     }
 
-    $data['table']['title'] = ['Nome'];
-       foreach ($categorias as $categoria) {
-           $data['table']['dados'][] = [$categoria['nome'], $categoria['codigo'], link_to('categoria/editar/'.$categoria['id'], 'Editar', ['class' => 'btn btn-primary'])];
-       }
+     return view('listar', compact('data'));
+ }
 
-        return view('listar', compact('data'));
+ public function store(Request $request){
+    try{
+        $categoria = new Categoria;
+        $categoria->fill($request->all());
+        $categoria->save();
+
+        return redirect('categoria/show')->with('success', 'Categoria Cadastrada!');
+    }catch (Exception $e){
+        return $e;
     }
+}
 
-    public function insert(Request $request){
-        try{
-            $categoria = new Categoria;
-            $categoria->fill($request->all());
-            $categoria->save();
-
-            return redirect('/')->with('status', 'Ae ae!');
-        }catch (Exception $e){
-            return $e;
-        }
-    }
-
-    public function update(categoriaValidator $request){
-        Categoria::find($request->get('id'))->fill($request->all())->update();
-    	return redirect('categoria/listar')->with('status', 'Sucesso my friend!');
-    }
+public function update(categoriaValidator $request){
+    Categoria::find($request->get('id'))->fill($request->all())->update();
+    return redirect('categoria/listar')->with('success', 'Categoria Atualizada!');
+}
 }

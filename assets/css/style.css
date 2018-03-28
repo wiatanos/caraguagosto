@@ -9,6 +9,7 @@ body{
   height : 100vh;
   width : 100%;
   keyboard :100vh;
+  background-attachment: fixed;
   /*overflow: hidden;*/
 }
 
@@ -140,12 +141,6 @@ input:focus + .slider {
 
 .nav-item a{
   color: rgba(52, 73, 94, 1) ;
-}
-
-.card-body{
-  max-height: 400px !important;
-  overflow-y: scroll;
-  overflow-x: auto;
 }
 
 .error-icon::before{

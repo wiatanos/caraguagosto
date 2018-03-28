@@ -9,7 +9,7 @@
 
 			<div class="col-12 card-body">
 
-				{{Form::open(['url' => $data['url'], 'id' => 'form'])}}
+				{{Form::open(['url' => $data['url'], 'method' => $data['method'], 'id' => 'form'])}}
 				<div class="input-group form-group">
 					<div class="input-group-addon"><i class="far fa-user"></i></div>
 					@if(isset($data['prato']))<input type="hidden" name="id" value="{{ $data['id'] }}">@endif

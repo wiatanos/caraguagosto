@@ -21,68 +21,80 @@ use App\Models\Restaurante;
 class pratoController extends BaseController
 {
 	
-	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function cadastrar(){
+  public function index(){
+    $data['url'] = 'prato/insert';
+    $data['method'] = 'POST';
 
-       foreach (Categoria::all() as $key => $value) {
-            $data['categorias'][$value['id']] = $value['nome'];
-       }
-
-       foreach (Restaurante::all() as $key => $value) {
-            $data['restaurantes'][$value['id']] = $value['nome'];
-       }
-       // return $data['categorias'];
-    	$data['url'] = 'prato/insert';
-    	return view('prato', compact('data'));
+     foreach (Categoria::all() as $key => $value) {
+      $data['categorias'][$value['id']] = $value['nome'];
     }
 
-    public function editar($id){
-      $prato = Prato::find($id);
-
-      $data['id'] = $id;
-       $data['prato'] = $prato->nome;
-       $data['restaurante'] = $prato->restaurante->id;
-       $data['categoria'] = $prato->categoria->id;
-
-       foreach (Categoria::all() as $key => $value) {
-            $data['categorias'][$value['id']] = $value['nome'];
-       }
-
-       foreach (Restaurante::all() as $key => $value) {
-            $data['restaurantes'][$value['id']] = $value['nome'];
-       }
-
-
-        $data['url'] = 'prato/update';
-
-    	return view('prato', compact('data'));
+    foreach (Restaurante::all() as $key => $value) {
+      $data['restaurantes'][$value['id']] = $value['nome'];
     }
 
-    public function listar(){
-        $data['table']['title'] = ['Prato', 'Restaurante'];
+    return view('prato', compact('data'));
+  }
 
-        foreach (Prato::all() as $key => $value) {
-           $data['table']['dados'][] = [$value['nome'], $value->restaurante->nome, link_to('prato/editar/'.$value['id'], 'Editar', ['class' => 'btn btn-primary'])];
-        }
+  public function edit($id){
+    $prato = Prato::find($id);
 
-        return view('listar', compact('data'));
+    $data['id'] = $id;
+    $data['prato'] = $prato->nome;
+    $data['restaurante'] = $prato->restaurante->id;
+    $data['categoria'] = $prato->categoria->id;
+
+    foreach (Categoria::all() as $key => $value) {
+      $data['categorias'][$value['id']] = $value['nome'];
     }
 
-    public function insert(Request $request){
-        try{
-            $prato = new Prato;
-            $prato->fill($request->all());
-            $prato->save();
-
-            return redirect('prato/listar')->with('status', 'Sucesso my frind');
-        }catch (Exception $e){
-            return $e;
-        }
+    foreach (Restaurante::all() as $key => $value) {
+      $data['restaurantes'][$value['id']] = $value['nome'];
     }
 
-    public function update(pratoValidator $request){
-      Prato::find($request->get('id'))->fill($request->all())->update();
-    	return redirect('prato/listar')->with('status', 'Sucesso my frind');
+
+    $data['url'] = 'prato/update';
+
+    return view('prato', compact('data'));
+  }
+
+  public function show(){
+    if (Prato::all()->count() == 0) {
+      return redirect('prato')->with('error', 'Nenhum Prato Cadastrado');
     }
+   $data['titulo'] = 'Pratos';
+
+   $data['table']['title'] = ['Prato', 'Restaurante'];
+
+   foreach (Prato::all() as $key => $value) {
+     $data['table']['dados'][] = [$value['nome'], $value->restaurante->nome, link_to('prato/'.$value['id'].'/edit', 'Editar', ['class' => 'btn btn-primary']), link_to('deletar/prato/'.$value->id, 'Deletar', ['class' => 'btn btn-danger'])];
+   }
+
+   return view('listar', compact('data'));
+  }
+
+  public function store(Request $request){
+    try{
+      $prato = new Prato;
+      $prato->fill($request->all());
+      $prato->save();
+
+      return redirect('prato/listar')->with('success', 'Prato Cadastrado!');
+    }catch (Exception $e){
+      return $e;
+    }
+  }
+
+  public function update(pratoValidator $request){
+    Prato::find($request->get('id'))->fill($request->all())->update();
+    return redirect('prato/listar')->with('success', 'Prato Atualizado!');
+  }
+
+  public function delete($id){
+    Prato::find($id)->delete();
+
+    return redirect('prato/listar')->with('success', 'Prato Excluido!');
+  }
 }

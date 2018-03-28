@@ -16,49 +16,51 @@ class restauranteController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function cadastrar(){
-    	$data['url'] = 'restaurante/insert';
-    	return view('restaurante', compact('data'));
+    public function index(){
+    	$data['url'] = 'restaurante';
+        $data['method'] = 'POST';
+
+        return view('restaurante', compact('data'));
     }
 
-    public function editar($id){
-       $restaurante['id'] = $id;
-       $restaurante['nome'] = Restaurante::find($id)->nome;
-       $restaurante['codigo'] = Restaurante::find($id)->codigo;
+    public function edit($id){
+        $data['method'] = 'PUT';
+        $data['url'] = 'restaurante/'.$id;
+       $data['id'] = $id;
+       $data['nome'] = Restaurante::find($id)->nome;
+       $data['codigo'] = Restaurante::find($id)->codigo;
 
-        $data = array_merge($restaurante, ['url' => 'restaurante/update']);
+       return view('restaurante', compact('data'));
+   }
 
-    	return view('restaurante', compact('data'));
-    }
-
-    public function listar(){
+   public function show(){
        $restaurantes = Restaurante::all();
 
-
-    $data['table']['title'] = ['Nome', 'Codigo'];
+       $data['titulo'] = 'Restaurantes';
+       $data['table']['title'] = ['Nome', 'Codigo'];
        foreach ($restaurantes as $restaurante) {
-           $data['table']['dados'][] = [$restaurante['nome'], $restaurante['codigo'], link_to('restaurante/editar/'.$restaurante['id'], 'Editar', ['class' => 'btn btn-primary'])];
+           $data['table']['dados'][] = [$restaurante['nome'], $restaurante['codigo'], link_to('restaurante/'.$restaurante['id'].'/edit', 'Editar', ['class' => 'btn btn-primary'])];
        }
 
-        return view('listar', compact('data'));
+       return view('listar', compact('data'));
+   }
+
+   public function store(restauranteValidator $request){
+    try{
+        $restaurante = new Restaurante;
+        $restaurante->fill($request->all());
+        $restaurante->save();
+
+        return redirect('restaurante/listar')->with('success', 'Restaurante Cadastrado!');
+    }catch (Exception $e){
+        return $e;
     }
+}
 
-    public function insert(restauranteValidator $request){
-        try{
-            $restaurante = new Restaurante;
-            $restaurante->fill($request->all());
-            $restaurante->save();
+public function update(restauranteValidator $request){
+    Restaurante::find($request->get('id'))->fill($request->all())->update();
+    $data['url'] = 'restaurante/insert';
 
-            return redirect('restaurante/listar')->with('status', 'Sucesso my friend!');
-        }catch (Exception $e){
-            return $e;
-        }
-    }
-
-    public function update(restauranteValidator $request){
-        Restaurante::find($request->get('id'))->fill($request->all())->update();
-        $data['url'] = 'restaurante/insert';
-
-        return redirect('restaurante/listar')->with('status', 'Sucesso my friend!');
-    }
+    return redirect('restaurante/listar')->with('success', 'Restaurante Atualizado!');
+}
 }

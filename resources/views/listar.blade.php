@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('titulo', 'Listar - {{ $data["titulo"] }}')
+@section('titulo', 'Listar - '.$data["titulo"])
 @extends('template.nav')
 @section('conteudo')
 <div class="col-12 card mt-3">
