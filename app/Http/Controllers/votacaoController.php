@@ -20,11 +20,10 @@ use App\Models\Pessoa;
 
 
 /**
-* 
+*
 */
 class votacaoController extends BaseController
 {
-	
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(){

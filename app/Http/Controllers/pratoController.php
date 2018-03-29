@@ -16,15 +16,14 @@ use App\Models\Restaurante;
 
 
 /**
-* 
+*
 */
 class pratoController extends BaseController
 {
-	
   use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
   public function index(){
-    $data['url'] = 'prato/insert';
+    $data['url'] = 'prato';
     $data['method'] = 'POST';
 
      foreach (Categoria::all() as $key => $value) {

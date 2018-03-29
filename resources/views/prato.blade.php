@@ -1,6 +1,6 @@
 @extends('template.layout')
 @section('titulo', 'Restaurantes')
-@extends('template.nav')
+@include('template.nav')
 @section('conteudo')
 <div class="row">
 	<div class="col-12 mt-5">

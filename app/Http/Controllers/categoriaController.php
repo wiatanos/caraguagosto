@@ -13,11 +13,10 @@ use App\Http\Requests\categoriaValidator;
 use App\Models\Categoria;
 
 /**
-* 
+*
 */
 class categoriaController extends BaseController
 {
-	
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(){

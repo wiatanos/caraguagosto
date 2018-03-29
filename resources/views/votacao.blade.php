@@ -6,7 +6,6 @@
 	<div class="col-12 mt-3">
 		<div class="card">
 			<div class="card-header text-center">Votação<br><p class="text-center"><img class="card-img text" src="assets/img/gosto.png" style="height: 100px; width: 100px;"></p></div>
-			
 			<div class="col-12 card-body">
 				{{Form::open(['url' => 'votacao/insert', 'id' => 'form'])}}
 				<ul class="col-12 nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
