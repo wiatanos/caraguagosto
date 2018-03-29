@@ -35,18 +35,23 @@ class categoriaController extends BaseController
     }
 
     public function show(){
-     $categorias = categoria::all();
+     $ativos = Categoria::all();
+     $inativos = Categoria::onlyTrashed()->get();
 
      $data['titulo'] = 'Categorias';
      $data['table']['title'] = ['Nome'];
-     foreach ($categorias as $categoria) {
-         $data['table']['dados'][] = [$categoria['nome'], $categoria['codigo'], link_to('categoria/'.$categoria['id'].'/edit', 'Editar', ['class' => 'btn btn-primary'])];
+     foreach ($ativos as $categoria) {
+         $data['table']['ativos'][] = [$categoria['nome'], $categoria['codigo'], link_to('categoria/'.$categoria['id'].'/edit', 'Editar', ['class' => 'btn btn-outline-primary']), link_to('deletar/categoria/'.$categoria->id, 'Deletar', ['class' => 'btn btn-outline-danger'])];
+     }
+
+     foreach ($inativos as $categoria) {
+         $data['table']['inativos'][] = [$categoria['nome'], $categoria['codigo'], link_to('ativar/categoria/'.$categoria['id'], 'Ativar', ['class' => 'btn btn-outline-primary'])];
      }
 
      return view('listar', compact('data'));
  }
 
- public function store(Request $request){
+ public function store(categoriaValidator $request){
     try{
         $categoria = new Categoria;
         $categoria->fill($request->all());
@@ -62,4 +67,11 @@ public function update(categoriaValidator $request){
     Categoria::find($request->get('id'))->fill($request->all())->update();
     return redirect('categoria/listar')->with('success', 'Categoria Atualizada!');
 }
+
+public function delete($id){
+    Categoria::find($id)->pratos()->delete();
+    Categoria::find($id)->delete();
+
+    return redirect('categoria/show')->with('success', 'Categoria Excluida!');
+  }
 }

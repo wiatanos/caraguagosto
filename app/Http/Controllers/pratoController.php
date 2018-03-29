@@ -74,7 +74,7 @@ class pratoController extends BaseController
    return view('listar', compact('data'));
   }
 
-  public function store(Request $request){
+  public function store(pratoValidator $request){
     try{
       $prato = new Prato;
       $prato->fill($request->all());

@@ -14,9 +14,9 @@ class Categoria extends Model
     public $fillable = ['nome'];
 
 
-    public function restaurantes()
+    public function pratos()
     {
-        return $this->hasMany('App\Models\Restaurante');
+        return $this->hasMany('App\Models\Prato');
     }
 }
 

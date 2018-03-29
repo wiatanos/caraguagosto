@@ -10,16 +10,7 @@ body{
   width : 100%;
   keyboard :100vh;
   background-attachment: fixed;
-  /*overflow: hidden;*/
 }
-
-.card-body{
-
-}
-.input-group-addon{
-	padding: 10px;
-}
-
 .navbar{
 	background-color: rgba(52, 73, 94,0.8) !important;
 	color: white !important;
@@ -33,38 +24,13 @@ body{
 	border: none;
 }
 
-button:focus{
-	outline: 5px auto transparent;
-}
+button:focus{outline: 5px auto transparent;}
 
-select.form-control:not([size]):not([multiple]){
-	height: auto;
-}
-
-.shadow{
-	background-color: rgba(255,255,255, 0.8);
-	box-shadow: 0 10px 10px 0px rgba(0,0,0, 0.1);
-	/*border: 2px solid white;*/
-}
-body{
-	/*background: url('../img/fundo.jpg');
-	background-size: width ;
-	background-repeat: no-repeat;
-	background-position: center;*/
-	background-color: #ecf0f1;
-}
-
-#conteudo{-webkit-margin-top: 20%; -moz-margin-top: 50px; margin-top: 20%;}
-
+select.form-control:not([size]):not([multiple]){height: auto;}
 
 .input-group-addon{
-	background-color: rgba(149, 165, 166, 0.2)
-}
-
-.btn-success {
-    color: #28a745;
-    background-color: white;
-    border-color: #28a745;
+	background-color: rgba(149, 165, 166, 0.2);
+  padding: 10px;
 }
 
 .card{

@@ -11,9 +11,14 @@
 |
 */
 Route::middleware(['auth'])->group(function(){
-	Route::resource('categoria', 	'categoriaController');
-	Route::resource('prato', 		'pratoController');
-	Route::resource('restaurante', 	'restauranteController');
+	Route::resources([
+		'categoria' 	=> 'categoriaController',
+		'prato' 		=> 'pratoController',
+		'restaurante'	=> 'restauranteController',
+	]);
+	Route::get('deletar/prato/{id}', 'pratoController@delete');
+	Route::get('deletar/restaurante/{id}', 'restauranteController@delete');
+	Route::get('deletar/categoria/{id}', 'categoriaController@delete');
 });
 
 Auth::routes();
@@ -30,7 +35,7 @@ Route::get('/', 'restauranteController@index')->middleware('auth');
 
 
 Route::get('/301', function(){
-   return abort(404);
+	return abort(404);
 });
 
 
